@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, Redirect } from 'react-router';
 
 import App from './components/app';
 import CarsIndex from './containers/cars-index';
@@ -35,5 +35,6 @@ export default (
         <Route path='cars/:id' component={CarShow} onEnter={requireAuth} />
         <Route path='cars/edit/:id' component={CarEdit} onEnter={requireAuth} />
         <Route path='authenticate' component={SignIn} onEnter={filterLoggedIn} />
+        <Redirect from='*' to='/' />
     </Route>
 );
