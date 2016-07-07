@@ -11,12 +11,14 @@ class CarsIndex extends Component {
     }
 
     componentWillMount() {
-        this.props.fetchCars();
+        this.props.fetchCars()
+            .catch(e => this.context.router.push('/'));
     }
 
     onSignOut() {
         this.props.signOut()
-            .then(() => this.context.router.push('/authenticate'));
+            .then(() => this.context.router.push('/authenticate'))
+            .catch(e => this.context.router.push('/'));
     }
 
     renderCars() {

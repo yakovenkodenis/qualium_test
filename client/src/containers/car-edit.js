@@ -26,6 +26,12 @@ class CarEdit extends Component {
     componentWillMount() {
         this.props.fetchCar(this.props.params.id)
             .then(() => {
+
+                // if (this.props.car.error) {
+                //     this.context.router.push('/');
+                // }
+
+                // const { car } = this.props.car;
                 const { car } = this.props;
 
                 this.setState({
@@ -34,7 +40,8 @@ class CarEdit extends Component {
                     author: car.author,
                     photoUrl: car.photoUrl
                 });
-            });
+            })
+            .catch(e => this.context.router.push('/'));
     }
 
     addDangerClassToInput({touched, invalid}) {
@@ -50,12 +57,14 @@ class CarEdit extends Component {
 
     onSignOut() {
         this.props.signOut()
-            .then(() => this.context.router.push('/authenticate'));
+            .then(() => this.context.router.push('/authenticate'))
+            .catch(e => this.context.router.push('/'));
     }
 
     onSubmit(props) {
         this.props.updateCar(this.props.params.id, props)
-            .then(() => this.context.router.push(`/cars/${this.props.params.id}`));
+            .then(() => this.context.router.push(`/cars/${this.props.params.id}`))
+            .catch(e => this.context.router.push('/'));
     }
 
     render() {
@@ -119,8 +128,7 @@ class CarEdit extends Component {
                             type='text'
                             className='form-control'
                             {...author}
-                            value={this.state.author}
-                            onChange={e => this.onInputChange(e, author.name)} />
+                            value={this.state.author} />
                         <div className='text-help'>
                             {author.touched ? author.error : ''}
                         </div>
@@ -155,11 +163,11 @@ function validate(values) {
     }
 
     if (!values.photoUrl) {
-        errors.photoUrl = 'Enter some photoUrl';
+        errors.photoUrl = 'Enter photo url';
     }
 
     if (!values.author) {
-        errors.author = 'Enter some author';
+        errors.author = 'Enter author';
     }
 
     return errors;

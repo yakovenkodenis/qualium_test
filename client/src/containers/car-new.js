@@ -16,12 +16,14 @@ class CarNew extends Component {
 
     onSignOut() {
         this.props.signOut()
-            .then(() => this.context.router.push('/authenticate'));
+            .then(() => this.context.router.push('/authenticate'))
+            .catch(e => this.context.router.push('/'));
     }
 
     onSubmit(props) {
         this.props.createCar(props)
-            .then(() => this.context.router.push('/'));
+            .then(() => this.context.router.push('/'))
+            .catch(e => this.context.router.push('/'));
     }
 
     render() {
@@ -89,7 +91,7 @@ function validate(values) {
     }
 
     if (!values.photoUrl) {
-        errors.photoUrl = 'Enter some photoUrl';
+        errors.photoUrl = 'Enter some photo url';
     }
 
     if (!values.author) {

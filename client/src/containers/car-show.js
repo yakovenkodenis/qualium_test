@@ -11,17 +11,26 @@ class CarShow extends Component {
     }
 
     componentWillMount() {
-        this.props.fetchCar(this.props.params.id);
+        this.props.fetchCar(this.props.params.id)
+            // .then(() => {
+            //     if (this.props.car.error) {
+            //         console.log('ERRORRRRR')
+            //         this.context.router.push('/');
+            //     }
+            // })
+            .catch(e => this.context.router.push('/'));
     }
 
     onSignOut() {
         this.props.signOut()
-            .then(() => this.context.router.push('/authenticate'));
+            .then(() => this.context.router.push('/authenticate'))
+            .catch(e => this.context.router.push('/'));
     }
 
     onDeleteClick() {
         this.props.deleteCar(this.props.params.id)
-            .then(() => this.context.router.push('/'));
+            .then(() => this.context.router.push('/'))
+            .catch(e => this.context.router.push('/'));
     }
 
     onUpdateClick() {

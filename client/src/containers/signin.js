@@ -12,7 +12,8 @@ class SignIn extends Component {
 
     onSubmit({ name, email, password }) {
         this.props.signIn(name, email, password)
-            .then(() => this.context.router.push('/'));
+            .then(() => this.context.router.push('/'))
+            .catch(e => this.context.router.push('/'));
     }
 
     addDangerClassToInput({ touched, invalid }) {
