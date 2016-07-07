@@ -1,0 +1,70 @@
+{
+  "name": "qualium_react_test",
+  "version": "1.0.0",
+  "description": "The test React app for Qualium Systems interview.",
+  "main": "server.js",
+  "engines": {
+    "node": "6.2.2"
+  },
+  "keywords": [
+    "React",
+    "Redux",
+    "React",
+    "Router",
+    "Javascript"
+  ],
+  "author": "Denis Yakovenko",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.12.0",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.5.2",
+    "redux": "^3.5.2",
+    "redux-form": "^5.3.1",
+    "redux-promise": "^0.5.3"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015-webpack": "^6.4.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "cpy-cli": "1.0.0",
+    "css-loader": "0.23.1",
+    "exports-loader": "^0.6.3",
+    "ghooks": "1.2.1",
+    "html-webpack-plugin": "^2.21.0",
+    "imports-loader": "^0.6.5",
+    "opt-cli": "1.4.2",
+    "rimraf": "2.5.2",
+    "style-loader": "0.13.1",
+    "webpack": "2.1.0-beta.12",
+    "webpack-dev-server": "2.0.0-beta",
+    "webpack-validator": "2.1.2"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "opt --in pre-commit --exec \"npm run validate\""
+    }
+  },
+  "scripts": {
+    "test": "karma start",
+    "watch:test": "npm test -- --auto-watch --no-single-run",
+    "validate": "npm-run-all --parallel validate-webpack:* lint test --serial",
+    "validate-webpack:dev": "webpack-validator webpack.config.js --env.dev",
+    "validate-webpack:prod": "webpack-validator webpack.config.js --env.prod",
+    "clean-dist": "rimraf dist",
+    "copy-files": "cpy src/favicon.ico dist",
+    "clean-and-copy": "npm run clean-dist && npm run copy-files",
+    "prestart": "npm run clean-and-copy",
+    "start": "webpack-dev-server --env.dev --content-base dist",
+    "prebuild": "npm run clean-and-copy",
+    "prebuild:prod": "npm run clean-and-copy",
+    "build": "webpack --env.dev",
+    "build:prod": "webpack --env.prod",
+    "lint": "eslint .",
+    "setup": "npm install && npm run validate"
+  }
+}
