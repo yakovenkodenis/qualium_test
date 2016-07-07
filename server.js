@@ -7,7 +7,7 @@ const autoIncrement = require('mongoose-auto-increment');
 require('mongoose-type-url');
 
 const port = process.env.PORT || 1337;
-const dbAddress = process.env.DB_ADDRESS || 'mongodb://localhost/cars_db';
+const dbAddress = process.env.MONGODB_URI || 'mongodb://localhost/cars_db';
 const allowCors = process.env.ALLOW_CORS || 'true';
 
 const app = express();
