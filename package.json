@@ -19,6 +19,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.14.0",
-    "mongoose": "^4.5.3"
+    "mongoose": "^4.5.3",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-type-url": "^1.0.2",
+    "morgan": "^1.7.0"
   }
 }

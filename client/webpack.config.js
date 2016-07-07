@@ -15,7 +15,7 @@ module.exports = env => {
             app: './index.js'
         },
         output: {
-            filename: 'bundle.[chunkhash].js',
+            filename: 'bundle.js',
             path: resolve(__dirname, 'dist'),
             pathinfo: true
         },

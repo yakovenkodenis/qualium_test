@@ -55,6 +55,9 @@
     "validate": "npm-run-all --parallel validate-webpack:* lint test --serial",
     "validate-webpack:dev": "webpack-validator webpack.config.js --env.dev",
     "validate-webpack:prod": "webpack-validator webpack.config.js --env.prod",
+    "copy-static": "cpy dist/index.html ../static && cpy dist/bundle.js ../static",
+    "clean-static": "rimraf ../static",
+    "clean-and-copy-static": "npm run clean-static && npm run copy-static",
     "clean-dist": "rimraf dist",
     "copy-files": "cpy src/favicon.ico dist",
     "clean-and-copy": "npm run clean-dist && npm run copy-files",
@@ -64,6 +67,8 @@
     "prebuild:prod": "npm run clean-and-copy",
     "build": "webpack --env.dev",
     "build:prod": "webpack --env.prod",
+    "build-and-copy-static": "npm run build && npm run clean-and-copy-static",
+    "build-and-copy-static:prod": "npm run build:prod && npm run clean-and-copy-static",
     "lint": "eslint .",
     "setup": "npm install && npm run validate"
   }
