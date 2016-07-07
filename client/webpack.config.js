@@ -12,30 +12,20 @@ module.exports = env => {
 
     return {
         entry: {
-            app: './src/index.js',
-            // vender: ['lodash', 'jquery']
+            app: './index.js'
         },
         output: {
             filename: 'bundle.[chunkhash].js',
-            // filename: 'bundle.[name].js',
             path: resolve(__dirname, 'dist'),
-            pathinfo: true,
+            pathinfo: true
         },
         context: resolve(__dirname, 'src'),
         devtool: isProd ? 'source-map' : 'eval',
         bail: env.prod,
         module: {
             loaders: [
-                {test: /\.js$/, loader: 'babel!eslint', exclude: /node_modules/},
-                {test: /\.css$/, loader: 'style!css'},
-                // {
-                //     test: require.resolve('./src/js/non_node_modules/left-pad'),
-                //     loaders: ['imports?window=>{}', 'exports?leftPad']
-                // },
-                // {
-                //     test: require.resolve('./src/js/non_node_modules/lodash_mixins'),
-                //     loader: 'imports?_=lodash'
-                // }
+                {test: /\.js$/, loader: 'babel', exclude: /node_modules/},
+                {test: /\.css$/, loader: 'style!css'}
             ]
         },
         plugins: removeEmpty([
@@ -58,7 +48,7 @@ module.exports = env => {
 
             ifProd(new webpack.optimize.UglifyJsPlugin({
                 compress: {
-                    screw_ie8: true, // eslint-disable-line
+                    screw_ie8: true,
                     warnings: false
                 }
             }))

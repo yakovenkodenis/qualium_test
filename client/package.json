@@ -2,7 +2,6 @@
   "name": "qualium_react_test",
   "version": "1.0.0",
   "description": "The test React app for Qualium Systems interview.",
-  "main": "server.js",
   "engines": {
     "node": "6.2.2"
   },
@@ -30,6 +29,7 @@
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015-webpack": "^6.4.1",
+    "babel-preset-react": "^6.1.18",
     "babel-preset-stage-0": "^6.5.0",
     "cpy-cli": "1.0.0",
     "css-loader": "0.23.1",
