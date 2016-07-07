@@ -8,7 +8,7 @@ export default function(state = INITIAL_STATE, action) {
         case FETCH_CARS:
             return { ...state, all: action.payload.data }
         case FETCH_CAR:
-            return { ...state, car: action.payload.data }
+            return { ...state, car: action.payload.data.car }
         default:
             return state;
     }

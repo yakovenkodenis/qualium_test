@@ -31,14 +31,16 @@ export function fetchCar(id) {
 export function createCar(props) {
     const request = axios.post(`${ROOT_URL}/cars`, props);
 
+    console.log(props);
+
     return {
         type: CREATE_CAR,
         payload: request
     }
 }
 
-export function updateCar(props) {
-    const request = axios.put(`${ROOT_URL}/cars`, props);
+export function updateCar(id, props) {
+    const request = axios.put(`${ROOT_URL}/cars/${id}`, props);
 
     return {
         type: UPDATE_CAR,

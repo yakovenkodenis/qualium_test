@@ -11,13 +11,14 @@ class CarsIndex extends Component {
     }
 
     renderCars() {
+        console.log(this.props.cars);
         return this.props.cars.map(car => {
             return (
-                <Link to={`cars/${car._id}`}>
-                    <li className='list-group-item' key={car._id}>
+                <li className='list-group-item' key={car._id}>
+                    <Link to={`cars/${car._id}`}>
                         {car.name} {car.description}
-                    </li>
-                </Link>
+                    </Link>
+                </li>
             );
         });
     }
@@ -25,6 +26,11 @@ class CarsIndex extends Component {
     render() {
         return (
             <div>
+                <div className='text-xs-right'>
+                    <Link to='/cars/new' className='btn btn-primary'>
+                        Add a Car
+                    </Link>
+                </div>
                 <h3>Cars</h3>
                 <ul className='list-group'>
                     {this.renderCars()}

@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -7,6 +8,7 @@ require('mongoose-type-url');
 
 const port = process.env.PORT || 1337;
 const dbAddress = process.env.DB_ADDRESS || 'mongodb://localhost/cars_db';
+const allowCors = process.env.ALLOW_CORS || 'true';
 
 const app = express();
 const pathToStatic = path.join(__dirname, 'static');
@@ -32,12 +34,22 @@ const Car = connection.model('Car', CarSchema);
 express.static(path.join(__dirname, 'static'));
 app.use(express.static(pathToStatic));
 app.use(morgan('dev'));
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Header', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
+if (allowCors == 'true') {
+    app.all('/*', (req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        res.header('Access-Control-Allow-Headers',
+            'Origin, X-Requested-With, Content-Type, Accept');
+        next();
+    });
+}
+
+// Get all cars
 app.get('/api/cars', (req, res) => {
     return Car.find((err, cars) => {
         if (!err) {
@@ -50,7 +62,9 @@ app.get('/api/cars', (req, res) => {
     });
 });
 
+// Create new car
 app.post('/api/cars', (req, res) => {
+    console.log(req);
     let car = new Car({
         name: req.body.name,
         author: req.body.author,
@@ -75,6 +89,7 @@ app.post('/api/cars', (req, res) => {
     });
 });
 
+// Get specific car with id
 app.get('/api/cars/:id', (req, res) => {
     return Car.findById(req.params.id, (err, car) => {
         if (!car) {
@@ -91,6 +106,7 @@ app.get('/api/cars/:id', (req, res) => {
     });
 });
 
+// Update specific car with id
 app.put('/api/cars/:id', (req, res) => {
     return Car.findById(req.params.id, (err, car) => {
         if (!car) {
@@ -121,6 +137,7 @@ app.put('/api/cars/:id', (req, res) => {
     });
 });
 
+// Delete car with id
 app.delete('/api/cars/:id', (req, res) => {
     return Car.findById(req.params.id, (err, car) => {
         if (!car) {
