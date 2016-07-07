@@ -1,17 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { fetchCars } from '../actions/index';
+import { fetchCars, signOut } from '../actions/index';
 
 
 class CarsIndex extends Component {
+
+    static contextTypes = {
+        router: PropTypes.object
+    }
 
     componentWillMount() {
         this.props.fetchCars();
     }
 
+    onSignOut() {
+        this.props.signOut()
+            .then(() => this.context.router.push('/authenticate'));
+    }
+
     renderCars() {
-        console.log(this.props.cars);
         return this.props.cars.map(car => {
             return (
                 <li className='list-group-item' key={car._id}>
@@ -30,6 +38,11 @@ class CarsIndex extends Component {
                     <Link to='/cars/new' className='btn btn-primary'>
                         Add a Car
                     </Link>
+                    <button
+                        onClick={this.onSignOut.bind(this)}
+                        className='btn btn-danger pull-xs-right'>
+                        Log Out
+                    </button>
                 </div>
                 <h3>Cars</h3>
                 <ul className='list-group'>
@@ -48,5 +61,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    { fetchCars }
+    { fetchCars, signOut }
 )(CarsIndex);

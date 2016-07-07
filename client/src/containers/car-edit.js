@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
-import { fetchCar, updateCar } from '../actions/index';
+import { fetchCar, updateCar, signOut } from '../actions/index';
 
 
 class CarEdit extends Component {
@@ -48,6 +48,11 @@ class CarEdit extends Component {
         })
     }
 
+    onSignOut() {
+        this.props.signOut()
+            .then(() => this.context.router.push('/authenticate'));
+    }
+
     onSubmit(props) {
         this.props.updateCar(this.props.params.id, props)
             .then(() => this.context.router.push(`/cars/${this.props.params.id}`));
@@ -64,63 +69,70 @@ class CarEdit extends Component {
         }
 
         return (
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                <h3>Add a new Car</h3>
-                <div className={`form-group ${this.addDangerClassToInput(name)}`}>
-                    <label>Name</label>
-                    <input
-                        type='text'
-                        className='form-control'
-                        {...name}
-                        value={this.state.name}
-                        onChange={e => this.onInputChange(e, name.name)} />
-                    <div className='text-help'>
-                        {name.touched ? name.error : ''}
-                    </div>
-                </div>
-                <div className={`form-group ${this.addDangerClassToInput(description)}`}>
-                    <label>Description</label>
-                    <input
-                        type='text'
-                        className='form-control'
-                        {...description}
-                        value={this.state.description}
-                        onChange={e => this.onInputChange(e, description.name)} />
-                    <div className='text-help'>
-                        {description.touched ? description.error : ''}
-                    </div>
-                </div>
-                <div className={`form-group ${this.addDangerClassToInput(photoUrl)}`}>
-                    <label>Image URL</label>
-                    <input
-                        type='text'
-                        className='form-control'
-                        {...photoUrl}
-                        value={this.state.photoUrl}
-                        onChange={e => this.onInputChange(e, photoUrl.name)} />
-                    <div className='text-help'>
-                        {photoUrl.touched ? photoUrl.error : ''}
-                    </div>
-                </div>
-                <div className={`form-group ${this.addDangerClassToInput(author)}`}>
-                    <label>Author</label>
-                    <input
-                        type='text'
-                        className='form-control'
-                        {...author}
-                        value={this.state.author}
-                        onChange={e => this.onInputChange(e, author.name)} />
-                    <div className='text-help'>
-                        {author.touched ? author.error : ''}
-                    </div>
-                </div>
-                <button type='submit' className='btn btn-primary'>
-                    Save
+            <div>
+                <button
+                    onClick={this.onSignOut.bind(this)}
+                    className='btn btn-danger pull-xs-right'>
+                    Log Out
                 </button>
-                <Link to={`/cars/${this.props.params.id}`} className='btn btn-danger'>
-                    Cancel
-                </Link>
-            </form>
+                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <h3>Add a new Car</h3>
+                    <div className={`form-group ${this.addDangerClassToInput(name)}`}>
+                        <label>Name</label>
+                        <input
+                            type='text'
+                            className='form-control'
+                            {...name}
+                            value={this.state.name}
+                            onChange={e => this.onInputChange(e, name.name)} />
+                        <div className='text-help'>
+                            {name.touched ? name.error : ''}
+                        </div>
+                    </div>
+                    <div className={`form-group ${this.addDangerClassToInput(description)}`}>
+                        <label>Description</label>
+                        <input
+                            type='text'
+                            className='form-control'
+                            {...description}
+                            value={this.state.description}
+                            onChange={e => this.onInputChange(e, description.name)} />
+                        <div className='text-help'>
+                            {description.touched ? description.error : ''}
+                        </div>
+                    </div>
+                    <div className={`form-group ${this.addDangerClassToInput(photoUrl)}`}>
+                        <label>Image URL</label>
+                        <input
+                            type='text'
+                            className='form-control'
+                            {...photoUrl}
+                            value={this.state.photoUrl}
+                            onChange={e => this.onInputChange(e, photoUrl.name)} />
+                        <div className='text-help'>
+                            {photoUrl.touched ? photoUrl.error : ''}
+                        </div>
+                    </div>
+                    <div className={`form-group ${this.addDangerClassToInput(author)}`}>
+                        <label>Author</label>
+                        <input
+                            type='text'
+                            className='form-control'
+                            {...author}
+                            value={this.state.author}
+                            onChange={e => this.onInputChange(e, author.name)} />
+                        <div className='text-help'>
+                            {author.touched ? author.error : ''}
+                        </div>
+                    </div>
+                    <button type='submit' className='btn btn-primary'>
+                        Save
+                    </button>
+                    <Link to={`/cars/${this.props.params.id}`} className='btn btn-danger'>
+                        Cancel
+                    </Link>
+                </form>
+            </div>
         );
     }
 }
@@ -157,4 +169,4 @@ export default reduxForm({
     form: 'CarEditForm',
     fields: ['name', 'author', 'description', 'photoUrl'],
     validate
-}, mapStateToProps, { fetchCar, updateCar })(CarEdit);
+}, mapStateToProps, { fetchCar, updateCar, signOut })(CarEdit);

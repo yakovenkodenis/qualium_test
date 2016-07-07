@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { fetchCar, deleteCar } from '../actions/index';
+import { fetchCar, deleteCar, signOut } from '../actions/index';
 
 
 class CarShow extends Component {
@@ -12,6 +12,11 @@ class CarShow extends Component {
 
     componentWillMount() {
         this.props.fetchCar(this.props.params.id);
+    }
+
+    onSignOut() {
+        this.props.signOut()
+            .then(() => this.context.router.push('/authenticate'));
     }
 
     onDeleteClick() {
@@ -34,6 +39,11 @@ class CarShow extends Component {
         return (
             <div>
                 <Link to='/'>Back Home</Link>
+                <button
+                    onClick={this.onSignOut.bind(this)}
+                    className='btn btn-danger pull-xs-right'>
+                    Log Out
+                </button>
                 <button
                     onClick={this.onDeleteClick.bind(this)}
                     className='btn btn-danger pull-xs-right'>
@@ -61,5 +71,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    { fetchCar, deleteCar }
+    { fetchCar, deleteCar, signOut }
 )(CarShow);
