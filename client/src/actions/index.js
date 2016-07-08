@@ -10,8 +10,8 @@ import {
 } from '../actions/constants';
 
 
-const ROOT_URL = 'http://localhost:1337/api';
-// const ROOT_URL = ' /api';
+// const ROOT_URL = 'http://localhost:1337/api';
+const ROOT_URL = ' /api';
 
 export function fetchCars() {
     const request = axios.get(`${ROOT_URL}/cars`);
