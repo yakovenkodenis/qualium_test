@@ -94,14 +94,14 @@ app.get('/api/cars/:id', (req, res) => {
     return Car.findById(req.params.id, (err, car) => {
         if (!car) {
             res.statusCode = 404;
-            return res.send({ error: 'Not found' });
+            return res.send({ car: { error: 'Not found' }});
         }
         if (!err) {
             return res.send({ status: 'OK', car });
         } else {
             console.log(err);
             res.statusCode = 500;
-            return res.send({ error: 'Server error' });
+            return res.send({ car: { error: 'Server error' }});
         }
     });
 });

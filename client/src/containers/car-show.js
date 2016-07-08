@@ -12,12 +12,11 @@ class CarShow extends Component {
 
     componentWillMount() {
         this.props.fetchCar(this.props.params.id)
-            // .then(() => {
-            //     if (this.props.car.error) {
-            //         console.log('ERRORRRRR')
-            //         this.context.router.push('/');
-            //     }
-            // })
+            .then(() => {
+                if (this.props.car.error) {
+                    this.context.router.push('/');
+                }
+            })
             .catch(e => this.context.router.push('/'));
     }
 
