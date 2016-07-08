@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import { validateUrlImage } from '../util/validate';
 import { fetchCar, updateCar, signOut } from '../actions/index';
+import auth from '../auth/auth';
 
 
 class CarEdit extends Component {
@@ -139,7 +140,7 @@ class CarEdit extends Component {
                                     type='text'
                                     className='form-control'
                                     {...author}
-                                    value={this.state.author} />
+                                    value={auth.getName()} />
                                 <div className='text-help'>
                                     {author.touched && author.error ? author.error : ''}
                                 </div>

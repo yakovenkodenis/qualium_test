@@ -34,8 +34,6 @@ export function fetchCar(id) {
 export function createCar(props) {
     const request = axios.post(`${ROOT_URL}/cars`, props);
 
-    console.log(props);
-
     return {
         type: CREATE_CAR,
         payload: request
