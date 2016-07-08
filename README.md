@@ -1,2 +1,1 @@
-# qualium_test
-The test app for Qualium Systems interview.
+# Test React app for Qualium Systems interview.
