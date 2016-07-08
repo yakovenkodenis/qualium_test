@@ -7,7 +7,7 @@ Installing dependencies and validating the webpack config file:
 npm install && cd client && npm run setup
 ```
 
-Starting a server:
+Starting the server:
 ```shell
 node server.js
 ```
@@ -19,7 +19,7 @@ Starting webpack-dev-server:
 npm run start
 ```
 
-Running tests:
+Running tests suit:
 ```shell
 npm test
 ```
