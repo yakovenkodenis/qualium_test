@@ -85,7 +85,6 @@
     "build:prod": "webpack --env.prod",
     "build-and-copy-static": "npm run build && npm run clean-and-copy-static",
     "build-and-copy-static:prod": "npm run build:prod && npm run clean-and-copy-static",
-    "lint": "eslint .",
     "setup": "npm install && npm run validate"
   }
 }
