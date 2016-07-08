@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { signIn } from '../actions/index';
+import { validateEmail } from '../util/validate';
 import auth from '../auth/auth';
 
 
@@ -27,30 +28,30 @@ class SignIn extends Component {
         } = this.props;
 
         return (
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className='signin-form'>
                 <h3>Please, authenticate to use the app</h3>
                 <div className={`form-group ${this.addDangerClassToInput(name)}`}>
                     <label>Name</label>
                     <input type='text' className='form-control' {...name} />
                     <div className='text-help'>
-                        {name.touched ? name.error : ''}
+                        {name.touched && name.error ? name.error : ''}
                     </div>
                 </div>
                 <div className={`form-group ${this.addDangerClassToInput(email)}`}>
                     <label>Email</label>
                     <input type='email' className='form-control' {...email} />
                     <div className='text-help'>
-                        {email.touched ? email.error : ''}
+                        {email.touched && email.error ? email.error : ''}
                     </div>
                 </div>
                 <div className={`form-group ${this.addDangerClassToInput(password)}`}>
                     <label>Password</label>
                     <input type='password' className='form-control' {...password} />
                     <div className='text-help'>
-                        {password.touched ? password.error : ''}
+                        {password.touched && password.error ? password.error : ''}
                     </div>
                 </div>
-                <button type='submit' className='btn btn-primary'>
+                <button type='submit' className='btn btn-primary pad-5'>
                     Sign In
                 </button>
             </form>
@@ -58,18 +59,22 @@ class SignIn extends Component {
     }
 }
 
-function validate(values) {
+function validate({ name, email, password }) {
     let errors = {};
 
-    if (!values.name) {
+    if (!name) {
         errors.name = 'Enter name';
     }
 
-    if (!values.email) {
+    if (!email) {
         errors.email = 'Enter email';
     }
 
-    if (!values.password) {
+    if (email && !validateEmail(email)) {
+        errors.email = 'Please provide a valid email address';
+    }
+
+    if (!password) {
         errors.password = 'Enter some password';
     }
 

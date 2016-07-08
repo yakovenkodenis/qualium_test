@@ -46,27 +46,37 @@ class CarShow extends Component {
         }
 
         return (
-            <div>
-                <Link to='/'>Back Home</Link>
+            <div className='container'>
+                <Link to='/' className='pad-5 link-home'>Back Home</Link>
                 <button
                     onClick={this.onSignOut.bind(this)}
-                    className='btn btn-danger pull-xs-right'>
+                    className='btn btn-danger pull-xs-right pad-5'>
                     Log Out
                 </button>
                 <button
                     onClick={this.onDeleteClick.bind(this)}
-                    className='btn btn-danger pull-xs-right'>
+                    className='btn btn-danger pull-xs-right pad-5'>
                     Delete Car
                 </button>
                 <button
                     onClick={this.onUpdateClick.bind(this)}
-                    className='btn btn-info pull-xs-right'>
+                    className='btn btn-info pull-xs-right pad-5'>
                     Edit
                 </button>
-                <h3>{car.name}</h3>
-                <p>{car.description}</p>
-                <p>{car.photoUrl}</p>
-                <span>this post was created by {car.author}.</span>
+                <div className='media pad-top-60'>
+                    <span className='media-left pad-right-10'>
+                        <img
+                            src={car.photoUrl}
+                            className='img-responsive media-object img-smaller' />
+                    </span>
+                    <div className='media-body'>
+                        <h3 className='media-heading'>{car.name}</h3>
+                        <p>{car.description}</p>
+                        <span className='author-show'>
+                            this post was last edited by {car.author}.
+                        </span>
+                    </div>
+                </div>
             </div>
         );
     }

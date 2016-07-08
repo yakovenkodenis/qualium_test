@@ -1,0 +1,67 @@
+.car-li {
+    margin-top: 10px;
+    margin-botton: 10px;
+}
+
+.img-smaller {
+    max-width: 400px !important;
+}
+
+.img-small {
+    max-width: 200px !important;
+}
+
+.img-thumbnail {
+    padding-right: 4px !important;
+}
+
+.media-left: {
+    padding-right: 0 !important;
+}
+
+.pad-5 {
+    margin: 5px;
+}
+
+.pad-top-10 {
+    margin-top: 10px;
+}
+
+.pad-top-60 {
+    margin-top: 60px;
+}
+
+.pad-right-10 {
+    margin-right: 10px;
+}
+
+.media-body {
+    padding-left: 30px;
+}
+
+.link-home:hover {
+    color: #0275d8;
+}
+
+.blue-hover:hover {
+    color: #0275d8;
+}
+
+.media-list-link {
+    cursor: pointer;
+}
+
+.media-list-link:not(.media-heading) {
+    text-decoration: none;
+    color: inherit;
+}
+
+.author-show {
+    margin-top: 50px;
+    float: right;
+}
+
+.signin-form {
+    width: 60%;
+    margin: 60px auto;
+}
