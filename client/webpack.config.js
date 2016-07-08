@@ -2,7 +2,6 @@ const webpack = require('webpack')
 const { resolve } = require('path')
 const isProd = process.env.NODE_ENV === 'production'
 const isTest= process.env.NODE_ENV === 'test'
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = env => {
 
@@ -29,9 +28,6 @@ module.exports = env => {
             ]
         },
         plugins: removeEmpty([
-            new HtmlWebpackPlugin({
-                template: './index.html'
-            }),
 
             ifProd(new webpack.optimize.DedupePlugin()),
 

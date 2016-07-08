@@ -11,7 +11,6 @@ const dbAddress = process.env.MONGODB_URI || 'mongodb://localhost/cars_db';
 const allowCors = process.env.ALLOW_CORS || 'true';
 
 const app = express();
-const pathToStatic = path.join(__dirname, 'static');
 
 
 // ======= MongoDB setup =======
@@ -31,8 +30,9 @@ CarSchema.plugin(autoIncrement.plugin, { model: 'Car', startAt: 1 });
 const Car = connection.model('Car', CarSchema);
 
 
-express.static(path.join(__dirname, 'static'));
-app.use(express.static(pathToStatic));
+// ======= API setup =======
+
+app.use(express.static(path.join(__dirname, 'static')));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
     extended: true
@@ -155,8 +155,8 @@ app.delete('/api/cars/:id', (req, res) => {
     });
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(pathToStatic, 'index.html'));
+app.get('*', (req, res, next) => {
+    res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
 app.listen(port, () => {
