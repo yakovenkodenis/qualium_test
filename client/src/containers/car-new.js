@@ -2,12 +2,29 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import { createCar, signOut } from '../actions/index';
+import auth from '../auth/auth';
 
 
 class CarNew extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = { author: '' }
+    }
+
     static contextTypes = {
         router: PropTypes.object
+    }
+
+    componentWillMount() {
+        const author = auth.getName();
+
+        if (author) {
+            this.setState({ author })
+        } else {
+            this.context.router.push('/');
+        }
     }
 
     addDangerClassToInput({ touched, invalid }) {
@@ -64,7 +81,11 @@ class CarNew extends Component {
                     </div>
                     <div className={`form-group ${this.addDangerClassToInput(author)}`}>
                         <label>Author</label>
-                        <input type='text' className='form-control' {...author} />
+                        <input
+                            type='text'
+                            className='form-control'
+                            {...author}
+                            value={this.state.author} />
                         <div className='text-help'>
                             {author.touched ? author.error : ''}
                         </div>
