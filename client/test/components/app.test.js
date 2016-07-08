@@ -8,4 +8,13 @@ describe('Component <App />' , () => {
         expect(shallow(<App />)
             .contains(<div className='root-app-wrapper' />)).to.be.true;
     });
+
+    it ('should render children when passed in', () => {
+        const wrapper = shallow(
+            <App>
+                <div className='unique' />
+            </App>
+        );
+        expect(wrapper.contains(<div className='unique' />)).to.be.true;
+    })
 });
