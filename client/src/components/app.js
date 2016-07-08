@@ -3,7 +3,7 @@ import React from 'react';
 
 export default ({ children }) => {
     return (
-        <div>
+        <div className='root-app-wrapper'>
             {children}
         </div>
     );

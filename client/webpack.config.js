@@ -23,9 +23,14 @@ module.exports = env => {
         bail: env.prod,
         module: {
             loaders: [
-                {test: /\.js$/, loader: 'babel', exclude: /node_modules/},
-                {test: /\.css$/, loader: 'style!css'}
+                { test: /\.js$/, loader: 'babel', exclude: /node_modules/ },
+                { test: /\.css$/, loader: 'style!css' },
+                { test: /\.json$/, loader: 'json' }
             ]
+        },
+        externals: {
+            'react/lib/ExecutionEnvironment': true,
+            'react/lib/ReactContext': true
         },
         plugins: removeEmpty([
 
